@@ -1,0 +1,107 @@
+// data/appointmentsData.js
+export const appointmentsData = [
+  {
+    id: "APT-2024-001",
+    doctor: "Dr. Sarah Johnson",
+    specialty: "Cardiologist",
+    date: "2024-03-25",
+    time: "10:00 AM",
+    fee: 3500,
+    location: "City Hospital, Colombo",
+    contact: "+94 112 345 678",
+    status: "Confirmed",
+    rating: "4.9",
+    notes: "Please bring previous medical reports"
+  },
+  {
+    id: "APT-2024-002",
+    doctor: "Dr. Michael Chen",
+    specialty: "Dermatologist",
+    date: "2024-03-20",
+    time: "2:30 PM",
+    fee: 2800,
+    location: "Skin Care Clinic, Kandy",
+    contact: "+94 812 345 678",
+    status: "Completed",
+    rating: "4.8",
+    notes: null
+  },
+  {
+    id: "APT-2024-003",
+    doctor: "Dr. Amara Perera",
+    specialty: "Pediatrician",
+    date: "2024-03-28",
+    time: "11:15 AM",
+    fee: 3200,
+    location: "Kids Care Hospital, Galle",
+    contact: "+94 912 345 678",
+    status: "Confirmed",
+    rating: "4.9",
+    notes: "Bring child's vaccination records"
+  },
+  {
+    id: "APT-2024-004",
+    doctor: "Dr. Raj Patel",
+    specialty: "Orthopedic",
+    date: "2024-03-15",
+    time: "9:00 AM",
+    fee: 4000,
+    location: "Bone & Joint Center, Colombo",
+    contact: "+94 113 345 678",
+    status: "Completed",
+    rating: "4.7",
+    notes: "X-rays required"
+  },
+  {
+    id: "APT-2024-005",
+    doctor: "Dr. Lisa Fernando",
+    specialty: "Neurologist",
+    date: "2024-04-05",
+    time: "3:00 PM",
+    fee: 5000,
+    location: "Neuro Care Institute, Negombo",
+    contact: "+94 312 345 678",
+    status: "Confirmed",
+    rating: "4.9",
+    notes: "MRI reports needed"
+  },
+  {
+    id: "APT-2024-006",
+    doctor: "Dr. Tharindu Silva",
+    specialty: "Ophthalmologist",
+    date: "2024-03-10",
+    time: "1:00 PM",
+    fee: 2500,
+    location: "Eye Care Center, Kurunegala",
+    contact: "+94 372 345 678",
+    status: "Cancelled",
+    rating: "4.6",
+    notes: null
+  },
+  {
+    id: "APT-2024-007",
+    doctor: "Dr. Nimal Wickramasinghe",
+    specialty: "General Physician",
+    date: "2024-04-01",
+    time: "8:30 AM",
+    fee: 2000,
+    location: "Family Health Clinic, Colombo",
+    contact: "+94 114 345 678",
+    status: "Rescheduled",
+    rating: "4.8",
+    notes: "Fasting required"
+  },
+  {
+    id: "APT-2024-008",
+    doctor: "Dr. Kamal Jayasinghe",
+    specialty: "Dentist",
+    date: "2024-03-22",
+    time: "4:00 PM",
+    fee: 3000,
+    location: "Smile Dental Studio, Kandy",
+    contact: "+94 815 345 678",
+    status: "Completed",
+    rating: "4.9",
+    notes: "Bring previous dental records"
+  }
+];
