@@ -1,0 +1,22 @@
+{
+  "name": "mediconnect-notification-service",
+  "version": "1.0.0",
+  "description": "MediConnect Notification Service — email and SMS notifications",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.1",
+    "express": "^5.2.1",
+    "helmet": "^8.1.0",
+    "nodemailer": "^8.0.5",
+    "twilio": "^5.13.1",
+    "axios": "^1.15.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}
