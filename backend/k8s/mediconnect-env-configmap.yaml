@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mediconnect-env
+data:
+  # Default DB (services may override per-service)
+  MONGODB_URI: mongodb://mongodb:27017/mediconnect
+  JWT_EXPIRE: 7d

@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: telemedicine-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: telemedicine-service
+  template:
+    metadata:
+      labels:
+        app: telemedicine-service
+    spec:
+      containers:
+      - name: telemedicine-service
+        image: backend-telemedicine-service
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 5007
+        env:
+        - name: PORT
+          value: "5007"
+        - name: MONGODB_URI
+          value: mongodb://mongodb:27017/mediconnect
+        envFrom:
+        - configMapRef:
+            name: mediconnect-env
+        - secretRef:
+            name: mediconnect-secrets
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: telemedicine-service
+spec:
+  selector:
+    app: telemedicine-service
+  ports:
+  - port: 5007
+    targetPort: 5007
