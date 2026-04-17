@@ -1,0 +1,188 @@
+services:
+  mongodb:
+    image: mongo:7
+    container_name: mediconnect-mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    environment:
+      MONGO_INITDB_DATABASE: mediconnect
+    restart: unless-stopped
+
+  user-service:
+    build:
+      context: ./services/user-service
+      dockerfile: Dockerfile
+    container_name: user-service
+    ports:
+      - "5001:5001"
+    env_file:
+      - ./.env
+    environment:
+      PORT: 5001
+      MONGODB_URI: mongodb://mongodb:27017/mediconnect_identity
+    depends_on:
+      - mongodb
+    restart: unless-stopped
+
+  appointment-service:
+    build:
+      context: ./services/appointment-service
+      dockerfile: Dockerfile
+    container_name: appointment-service
+    ports:
+      - "5002:5002"
+    env_file:
+      - ./.env
+    environment:
+      PORT: 5002
+      MONGODB_URI: mongodb://mongodb:27017/mediconnect_identity
+    depends_on:
+      - mongodb
+    restart: unless-stopped
+
+  consultation-service:
+    build:
+      context: ./services/consultation-service
+      dockerfile: Dockerfile
+    container_name: consultation-service
+    ports:
+      - "5003:5003"
+    env_file:
+      - ./.env
+    environment:
+      PORT: 5003
+      MONGODB_URI: mongodb://mongodb:27017/mediconnect_consultation
+      SHARED_IDENTITY_MONGODB_URI: mongodb://mongodb:27017/mediconnect_identity
+    volumes:
+      - consultation-uploads:/app/uploads
+    depends_on:
+      - mongodb
+    restart: unless-stopped
+
+  notification-service:
+    build:
+      context: ./services/notification-service
+      dockerfile: Dockerfile
+    container_name: notification-service
+    ports:
+      - "5004:5004"
+    env_file:
+      - ./.env
+    environment:
+      PORT: 5004
+      MONGODB_URI: mongodb://mongodb:27017/mediconnect
+    depends_on:
+      - mongodb
+    restart: unless-stopped
+
+  pharmacy-service:
+    build:
+      context: ./services/pharmacy-service
+      dockerfile: Dockerfile
+    container_name: pharmacy-service
+    ports:
+      - "5005:5005"
+    env_file:
+      - ./.env
+    environment:
+      PORT: 5005
+      MONGODB_URI: mongodb://mongodb:27017/mediconnect_pharmacy
+      SHARED_IDENTITY_MONGODB_URI: mongodb://mongodb:27017/mediconnect_identity
+    depends_on:
+      - mongodb
+    restart: unless-stopped
+
+  payment-service:
+    build:
+      context: ./services/payment-service
+      dockerfile: Dockerfile
+    container_name: payment-service
+    ports:
+      - "5006:5006"
+    env_file:
+      - ./.env
+    environment:
+      PORT: 5006
+      MONGODB_URI: mongodb://mongodb:27017/mediconnect
+    depends_on:
+      - mongodb
+    restart: unless-stopped
+
+  telemedicine-service:
+    build:
+      context: ./services/telemedicine-service
+      dockerfile: Dockerfile
+    container_name: telemedicine-service
+    ports:
+      - "5007:5007"
+    env_file:
+      - ./.env
+    environment:
+      PORT: 5007
+      MONGODB_URI: mongodb://mongodb:27017/mediconnect
+    depends_on:
+      - mongodb
+    restart: unless-stopped
+
+  ai-symptom-checker-service:
+    build:
+      context: ./services/ai-symptom-checker-service
+      dockerfile: Dockerfile
+    container_name: ai-symptom-checker-service
+    ports:
+      - "5008:5008"
+    env_file:
+      - ./.env
+    environment:
+      PORT: 5008
+      MONGODB_URI: mongodb://mongodb:27017/mediconnect
+    depends_on:
+      - mongodb
+    restart: unless-stopped
+
+  api-gateway:
+    build:
+      context: ./services/api-gateway
+      dockerfile: Dockerfile
+    container_name: api-gateway
+    ports:
+      - "5000:5000"
+    env_file:
+      - ./.env
+    environment:
+      PORT: 5000
+      USER_SERVICE_URL: http://user-service:5001
+      APPOINTMENT_SERVICE_URL: http://appointment-service:5002
+      CONSULTATION_SERVICE_URL: http://consultation-service:5003
+      NOTIFICATION_SERVICE_URL: http://notification-service:5004
+      PHARMACY_SERVICE_URL: http://pharmacy-service:5005
+      PAYMENT_SERVICE_URL: http://payment-service:5006
+      TELEMEDICINE_SERVICE_URL: http://telemedicine-service:5007
+      SYMPTOM_CHECKER_URL: http://ai-symptom-checker-service:5008
+    depends_on:
+      - user-service
+      - appointment-service
+      - consultation-service
+      - notification-service
+      - pharmacy-service
+      - payment-service
+      - telemedicine-service
+      - ai-symptom-checker-service
+    restart: unless-stopped
+
+  frontend:
+    build: ../frontend
+    container_name: mediconnect-frontend
+    ports:
+      - "5173:80"
+    depends_on:
+      - api-gateway
+    restart: unless-stopped
+
+volumes:
+  mongo-data:
+    driver: local
+  consultation-uploads:
+    driver: local
