@@ -1,0 +1,20 @@
+{
+  "name": "mediconnect-ai-symptom-checker-service",
+  "version": "1.0.0",
+  "description": "MediConnect AI Symptom Checker Service — preliminary suggestions and recommended specialties",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.1",
+    "express": "^5.2.1",
+    "helmet": "^8.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}
+
