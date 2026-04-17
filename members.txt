@@ -1,0 +1,11 @@
+
+Group ID : KDY_UNI_3YS2G1
+
+
+IT Number     |  Name                 |
+---------------------------------------
+IT23217454    |  R.M.M.K Rathnayaka   |
+IT23266650    |  S.M.K.S Senavirathna |
+IT23396418    |  K.U.R.C.T Rathnayaka |
+IT23373570    |  D.K.G.A Thasindu     |
+---------------------------------------

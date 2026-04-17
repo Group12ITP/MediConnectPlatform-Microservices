@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pharmacy-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pharmacy-service
+  template:
+    metadata:
+      labels:
+        app: pharmacy-service
+    spec:
+      containers:
+      - name: pharmacy-service
+        image: backend-pharmacy-service
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 5005
+        env:
+        - name: PORT
+          value: "5005"
+        - name: MONGODB_URI
+          value: mongodb://mongodb:27017/mediconnect_pharmacy
+        - name: SHARED_IDENTITY_MONGODB_URI
+          value: mongodb://mongodb:27017/mediconnect_identity
+        envFrom:
+        - configMapRef:
+            name: mediconnect-env
+        - secretRef:
+            name: mediconnect-secrets
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pharmacy-service
+spec:
+  selector:
+    app: pharmacy-service
+  ports:
+  - port: 5005
+    targetPort: 5005

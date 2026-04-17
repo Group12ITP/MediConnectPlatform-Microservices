@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: appointment-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: appointment-service
+  template:
+    metadata:
+      labels:
+        app: appointment-service
+    spec:
+      containers:
+      - name: appointment-service
+        image: backend-appointment-service
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 5002
+        env:
+        - name: PORT
+          value: "5002"
+        - name: MONGODB_URI
+          value: mongodb://mongodb:27017/mediconnect_identity
+        envFrom:
+        - configMapRef:
+            name: mediconnect-env
+        - secretRef:
+            name: mediconnect-secrets
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: appointment-service
+spec:
+  selector:
+    app: appointment-service
+  ports:
+  - port: 5002
+    targetPort: 5002
