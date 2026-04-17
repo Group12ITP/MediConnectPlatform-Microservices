@@ -1,4 +1,4 @@
-GitHub Link : https://github.com/Group12ITP/MediConnect-Microservices.git
+GitHub Link : https://github.com/Group12ITP/MediConnectPlatform-Microservices.git
 
 
 Youtube Link : https://www.youtube.com/watch?v=3Cww1bV4O7s
